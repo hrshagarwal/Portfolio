@@ -54,7 +54,7 @@ export default function Hero() {
         transition={{ delay: 0.3 }}
         className="text-lg md:text-2xl text-slate-400 font-light mb-4"
       >
-        Sophomore at IIT Jammu | SIH 2025 Winner
+        Sophomore at IIT Jammu | SIH 2025 Winner | Department Rank 1
       </motion.div>
 
       <motion.p 
