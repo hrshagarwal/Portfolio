@@ -17,6 +17,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata = {
   title: "Harsh Agarwal | Portfolio",
   description: "B.Tech Civil Engineering & Minor in CSE at IIT Jammu. Backend-focused Full Stack Engineer.",
+  icons: {
+    icon: "/images/my_photo.jpeg",
+  },
 };
 
 export default function RootLayout({ children }) {
