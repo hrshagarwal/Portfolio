@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+:root {
+  /* Rich Royal Navy Blue Base */
+  --background: hsl(222, 47%, 12%); 
+  --foreground: hsl(210, 40%, 98%);
+  
+  --muted: hsl(217, 33%, 20%);
+  --muted-foreground: hsl(215, 20%, 75%);
+  
+  --popover: hsl(222, 47%, 14%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  
+  --card: hsl(222, 47%, 14%);
+  --card-foreground: hsl(210, 40%, 98%);
+  
+  --border: hsl(217, 33%, 25%);
+  --input: hsl(217, 33%, 25%);
+  
+  --primary: hsl(210, 100%, 60%); /* Vibrant Blue */
+  --primary-foreground: hsl(0, 0%, 100%);
+  
+  --secondary: hsl(217, 33%, 20%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  
+  --accent: hsl(210, 100%, 60%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  
+  --ring: hsl(210, 100%, 60%);
+  --radius: 0.75rem;
+
+  /* Portfolio Theme Colors - All Blue Theme */
+  --warm-orange: hsl(210, 100%, 60%); /* Unified Blue */
+  --warm-orange-light: hsl(210, 100%, 75%);
+  --warm-orange-dark: hsl(210, 100%, 50%);
+  
+  --soft-peach: hsl(222, 47%, 18%);
+  --cream: hsl(222, 47%, 16%);
+  
+  --sage-green: hsl(210, 100%, 60%); /* Swapped Green to Blue for consistency too */
+  --sage-green-light: hsl(210, 100%, 75%);
+  
+  --terracotta: hsl(210, 100%, 60%);
+  
+  --warm-gray: hsl(215, 20%, 75%);
+  --warm-gray-light: hsl(215, 20%, 85%);
+  --warm-gray-lighter: hsl(217, 33%, 25%);
+  --sand: hsl(217, 33%, 20%);
+  
+  --font-ibm: var(--font-ibm-plex-sans);
+}
+
+.dark {
+  --background: hsl(222, 47%, 12%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 47%, 14%);
+  /* ... (rest mapped similarly as base is already dark) ... */
+}
+
+@theme inline {
+  --font-sans: var(--font-ibm);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  --color-warm-orange: var(--warm-orange);
+  --color-warm-orange-light: var(--warm-orange-light);
+  --color-warm-orange-dark: var(--warm-orange-dark);
+  --color-sage-green: var(--sage-green);
+  --color-terracotta: var(--terracotta);
+  --color-cream: var(--cream);
+  --color-soft-peach: var(--soft-peach);
+  
+  --animate-wave: wave 2.5s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased text-foreground;
+    /* Deep Navy Background matching reference */
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .bg-warm-orange { background-color: var(--warm-orange); }
+  .bg-warm-orange-light { background-color: var(--warm-orange-light); }
+  .bg-warm-orange-dark { background-color: var(--warm-orange-dark); }
+  .bg-soft-peach { background-color: var(--soft-peach); }
+  .bg-cream { background-color: var(--cream); }
+  .bg-sage-green { background-color: var(--sage-green); }
+  .bg-sage-green-light { background-color: var(--sage-green-light); }
+  .bg-terracotta { background-color: var(--terracotta); }
+  .bg-warm-gray { background-color: var(--warm-gray); }
+  .bg-warm-gray-light { background-color: var(--warm-gray-light); }
+  .bg-warm-gray-lighter { background-color: var(--warm-gray-lighter); }
+  .bg-sand { background-color: var(--sand); }
+  
+  .text-warm-orange { color: var(--warm-orange); }
+  .text-warm-orange-dark { color: var(--warm-orange-dark); }
+  .text-sage-green { color: var(--sage-green); }
+  .text-terracotta { color: var(--terracotta); }
+  .text-warm-gray { color: var(--warm-gray); }
+  .text-warm-gray-light { color: var(--warm-gray-light); }
+  
+  .border-warm-gray-lighter { border-color: var(--warm-gray-lighter); }
+  .border-sand { border-color: var(--sand); }
+  
+  .hover\:bg-warm-orange-light:hover { background-color: var(--warm-orange-light); }
+  .hover\:text-warm-orange:hover { color: var(--warm-orange); }
+  
+  .bg-gradient-warm {
+    background: linear-gradient(135deg, var(--soft-peach), var(--cream));
+  }
+  
+  .bg-gradient-hero {
+    background: transparent; /* Now handled by body gradient */
+  }
+
+  /* Text Gradient Animation */
+  .animate-text-gradient {
+    background-size: 200% auto;
+    animation: textGradient 4s linear infinite;
+  }
+
+  /* Animation utilities - Static / Professional */
+  .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+  .animate-slide-up { animation: slideUp 0.8s ease-out forwards; }
+  .animate-slide-in-left { animation: slideInLeft 0.8s ease-out forwards; }
+  .animate-slide-in-right { animation: slideInRight 0.8s ease-out forwards; }
+  .animate-scale-in { animation: scaleIn 0.5s ease-out forwards; }
+  .animate-bounce-in { animation: scaleIn 0.6s ease-out forwards; }
+  .animate-float { animation: float 6s ease-in-out infinite; } 
+  .animate-pulse-glow { animation: pulseGlow 4s ease-in-out infinite; }
+  .animate-typing { animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite; }
+  
+  .hover-lift {
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  .hover-glow {
+    transition: box-shadow 0.2s ease-out;
+  }
+  .hover-glow:hover {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+  }
+
+  .animate-delay-100 { animation-delay: 0.1s; }
+  .animate-delay-200 { animation-delay: 0.2s; }
+  .animate-delay-300 { animation-delay: 0.3s; }
+  .animate-delay-400 { animation-delay: 0.4s; }
+  .animate-delay-500 { animation-delay: 0.5s; }
+  .animate-delay-600 { animation-delay: 0.6s; }
+
+  .animate-progress { animation: progressBar 2s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+  
+  /* Glass Panel Utility */
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}
+
+@keyframes textGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes bounceIn { 
+  0% { opacity: 0; transform: scale(0.3); } 
+  50% { opacity: 1; transform: scale(1.05); } 
+  70% { transform: scale(0.9); } 
+  100% { opacity: 1; transform: scale(1); } 
+}
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+@keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 5px rgba(66, 165, 245, 0.5); } 50% { box-shadow: 0 0 20px rgba(66, 165, 245, 0.8); } }
+@keyframes progressBar { from { width: 0%; } to { width: var(--progress-width, 100%); } }
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: hsl(210, 85%, 60%); } }
