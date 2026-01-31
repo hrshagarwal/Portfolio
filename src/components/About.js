@@ -28,7 +28,7 @@ export default function About() {
               A passionate civil engineering student at IIT Jammu, exploring the intersection of software development, system-level programming, and tech leadership.
             </p>
             <p className="mb-6">
-              Hardworking and self-taught, with a strong love for C++, Python, Web Development, and Reverse Engineering.
+              Hardworking and self-taught, with a strong love for C++, Python, Web Development, and AI & ML.
             </p>
 
             <ul className="space-y-4 mt-6">
@@ -44,12 +44,7 @@ export default function About() {
                  <strong className="text-foreground">Department Rank 1:</strong> Consistently topping the cohort with 9.03 CGPA.
                 </span>
               </li>
-              <li className="flex items-start gap-3">
-                <span className="text-xl mt-1">🧠</span>
-                <span>
-                  <strong className="text-foreground">JEE Advanced Qualified:</strong> Cracked one of the toughest exams in the first attempt.
-                </span>
-              </li>
+
             </ul>
           </div>
         </motion.div>
@@ -93,8 +88,8 @@ export default function About() {
                     <div className="flex gap-4 relative">
                        <div className="w-10 h-10 rounded-full bg-[#f97316] flex-shrink-0 z-10 border-4 border-[#1e293b]"></div>
                        <div>
-                           <h4 className="font-bold text-foreground text-lg">Innovation</h4>
-                           <p className="text-muted-foreground text-sm">Working on anti-sleeping glasses project</p>
+                           <h4 className="font-bold text-foreground text-lg">National Winner</h4>
+                           <p className="text-muted-foreground text-sm">Smart India Hackathon 2025</p>
                        </div>
                    </div>
                </div>

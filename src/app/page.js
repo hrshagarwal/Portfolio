@@ -54,12 +54,6 @@ export default function Home() {
       github: "https://github.com/hrshagarwal/"
     },
     {
-      title: "IPL Ad Muter",
-      description: "Computer vision application that automatically mutes the system volume during ads in IPL streams.",
-      techStack: ["Python", "OpenCV", "Pycaw"],
-      github: "https://github.com/hrshagarwal/"
-    },
-    {
       title: "Strong Password Generator",
       description: "Utility tool for generating cryptographically secure passwords with custom entropy rules.",
       techStack: ["Python", "Secrets", "Regex"],

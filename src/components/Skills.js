@@ -35,6 +35,12 @@ export default function Skills() {
             { name: "Linux", icon: "https://cdn.simpleicons.org/linux/FCC624" },
             { name: "Postman", icon: "https://cdn.simpleicons.org/postman/FF6C37" },
             { name: "Vercel", icon: "https://cdn.simpleicons.org/vercel/000000/ffffff" }
+        ],
+        "Data Science": [
+            { name: "Pandas", icon: "https://cdn.simpleicons.org/pandas/150458" },
+            { name: "NumPy", icon: "https://cdn.simpleicons.org/numpy/013243" },
+            { name: "Matplotlib", icon: "https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg" },
+            { name: "Seaborn", icon: null } // Seaborn often lacks a simple icon, standard fallback
         ]
     };
 
