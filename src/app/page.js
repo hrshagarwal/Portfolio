@@ -57,7 +57,7 @@ export default function Home() {
       title: "Strong Password Generator",
       description: "Utility tool for generating cryptographically secure passwords with custom entropy rules.",
       techStack: ["Python", "Secrets", "Regex"],
-      github: "https://github.com/hrshagarwal/"
+      github: "https://github.com/hrshagarwal/Password-Generator"
     }
   ];
 
