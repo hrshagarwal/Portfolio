@@ -20,6 +20,8 @@ export default function Skills() {
         ],
         "Database": [
             { name: "MongoDB", icon: "https://cdn.simpleicons.org/mongodb/47A248" },
+            { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql/4169E1" },
+            { name: "MySQL", icon: "https://cdn.simpleicons.org/mysql/4479A1" },
             { name: "Mongoose", icon: "https://cdn.simpleicons.org/mongoose/880000" }
         ],
         "Frontend": [
@@ -34,13 +36,16 @@ export default function Skills() {
             { name: "GitHub", icon: "https://cdn.simpleicons.org/github/181717/ffffff" },
             { name: "Linux", icon: "https://cdn.simpleicons.org/linux/FCC624" },
             { name: "Postman", icon: "https://cdn.simpleicons.org/postman/FF6C37" },
-            { name: "Vercel", icon: "https://cdn.simpleicons.org/vercel/000000/ffffff" }
+            { name: "Vercel", icon: "https://cdn.simpleicons.org/vercel/000000/ffffff" },
+            { name: "Jupyter", icon: "https://cdn.simpleicons.org/jupyter/F37626" },
+            { name: "Mininet", icon: null }
         ],
         "Data Science": [
             { name: "Pandas", icon: "https://cdn.simpleicons.org/pandas/150458" },
             { name: "NumPy", icon: "https://cdn.simpleicons.org/numpy/013243" },
+            { name: "scikit-learn", icon: "https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" },
             { name: "Matplotlib", icon: "https://upload.wikimedia.org/wikipedia/commons/8/84/Matplotlib_icon.svg" },
-            { name: "Seaborn", icon: null } // Seaborn often lacks a simple icon, standard fallback
+            { name: "Seaborn", icon: null }
         ]
     };
 

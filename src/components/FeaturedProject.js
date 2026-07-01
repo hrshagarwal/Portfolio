@@ -6,6 +6,7 @@ import Image from "next/image";
 
 export default function FeaturedProject({ project, index }) {
   const isEven = index % 2 === 0;
+  const isDeAccentuated = project.deAccentuated;
 
   return (
     <motion.div 
@@ -13,7 +14,7 @@ export default function FeaturedProject({ project, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.5 }}
-      className={`relative grid grid-cols-12 gap-y-8 items-center mb-32 ${isEven ? "" : "text-right"}`}
+      className={`relative grid grid-cols-12 gap-y-8 items-center mb-32 ${isEven ? "" : "text-right"} ${isDeAccentuated ? "opacity-60 hover:opacity-80 transition-opacity" : ""}`}
     >
       {/* Project Image Content */}
       {!project.hideImage && (
@@ -48,31 +49,6 @@ export default function FeaturedProject({ project, index }) {
                             <span className="text-sm font-mono">Demo Video Placeholder</span>
                         </div>
                     )
-                  ) : project.research ? (
-                      /* Abstract Pattern for Research Projects */
-                      <div className="w-full h-full relative opacity-20">
-                           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-sage-green/40 to-transparent" />
-                           <pre className="text-[0.6rem] text-sage-green font-mono p-4 leading-none select-none">
-                              {`
-  class PostQuantumSDN {
-    constructor() {
-      this.topology = new Graph();
-      this.controller = new SecureController();
-    }
-  
-    optimizeTraffic(flow) {
-      const route = this.dijkstra(flow);
-      return this.encrypt(route);
-    }
-  
-    encrypt(data) {
-      // CRYSTALS-Kyber Implementation
-      return quantumSafeParams.encap(data);
-    }
-  }
-                              `.repeat(3)}
-                           </pre>
-                      </div>
                   ) : (
                       <div className="text-muted-foreground font-mono text-4xl font-bold opacity-10">
                           {project.title}
@@ -85,16 +61,18 @@ export default function FeaturedProject({ project, index }) {
   
       {/* Project Text Content - Expands if hideImage is true */}
       <div className={`relative z-20 ${project.hideImage ? "col-span-12 text-left" : `col-span-12 md:col-span-6 ${isEven ? "md:col-start-7 md:text-right" : "md:col-start-1 md:row-start-1 md:text-left"}`}`}>
-        <p className="font-mono text-warm-orange text-sm mb-2">Featured Project</p>
-        <h3 className="font-sans text-3xl font-bold text-foreground mb-6 hover:text-warm-orange transition-colors">
+        <p className={`font-mono text-sm mb-2 ${isDeAccentuated ? "text-muted-foreground" : "text-warm-orange"}`}>
+          {isDeAccentuated ? "Ongoing Research" : "Featured Project"}
+        </p>
+        <h3 className={`font-sans font-bold text-foreground mb-6 hover:text-warm-orange transition-colors ${isDeAccentuated ? "text-xl" : "text-3xl"}`}>
             {project.title}
         </h3>
         
-        <div className="glass-panel p-6 rounded-lg text-muted-foreground text-sm leading-relaxed shadow-xl mb-6 hover-lift">
+        <div className={`glass-panel p-6 rounded-lg text-muted-foreground leading-relaxed shadow-xl mb-6 hover-lift ${isDeAccentuated ? "text-xs" : "text-sm"}`}>
             <p>{project.description}</p>
         </div>
 
-        {project.engineering && (
+        {project.engineering && !isDeAccentuated && (
             <div className={`flex flex-wrap gap-2 mb-6 text-xs font-mono text-muted-foreground ${isEven ? "justify-end" : "justify-start"}`}>
                 {project.engineering.map((tech, i) => (
                     <span key={i} className="text-sage-green">• {tech}</span>
@@ -102,28 +80,34 @@ export default function FeaturedProject({ project, index }) {
             </div>
         )}
 
-        <ul className={`flex flex-wrap gap-4 text-xs font-mono text-muted-foreground/80 mb-8 ${isEven ? "justify-end" : "justify-start"}`}>
+        <ul className={`flex flex-wrap gap-4 font-mono text-muted-foreground/80 mb-8 ${isEven ? "justify-end" : "justify-start"} ${isDeAccentuated ? "text-xs opacity-70" : "text-xs"}`}>
             {project.techStack.map((tech, i) => (
                 <li key={i}>{tech}</li>
             ))}
         </ul>
 
-        <div className={`flex items-center gap-4 ${isEven ? "justify-end" : "justify-start"}`}>
-            {project.github && (
-                <a href={project.github} className="text-foreground hover:text-warm-orange transition-colors">
-                    <Github className="w-6 h-6" />
-                </a>
-            )}
-            {project.link && (
-                <a href={project.link} className="text-foreground hover:text-warm-orange transition-colors">
-                    <ExternalLink className="w-6 h-6" />
-                </a>
-            )}
-        </div>
+        {!isDeAccentuated && (
+          <div className={`flex items-center gap-4 ${isEven ? "justify-end" : "justify-start"}`}>
+              {project.github && (
+                  <a href={project.github} className="text-foreground hover:text-warm-orange transition-colors">
+                      <Github className="w-6 h-6" />
+                  </a>
+              )}
+              {project.link && (
+                  <a href={project.link} className="text-foreground hover:text-warm-orange transition-colors">
+                      <ExternalLink className="w-6 h-6" />
+                  </a>
+              )}
+          </div>
+        )}
         
         {project.status && (
              <div className={`mt-4 ${isEven ? "text-right" : "text-left"}`}>
-                <span className="inline-block px-3 py-1 text-xs border border-warm-orange/30 text-warm-orange rounded-full bg-warm-orange/5">
+                <span className={`inline-block px-3 py-1 text-xs rounded-full ${
+                  isDeAccentuated 
+                    ? "border border-muted/30 text-muted-foreground bg-secondary/20" 
+                    : "border border-warm-orange/30 text-warm-orange bg-warm-orange/5"
+                }`}>
                     {project.status}
                 </span>
              </div>

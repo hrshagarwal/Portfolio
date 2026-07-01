@@ -9,10 +9,10 @@ export default function Education() {
             degree: "B.Tech in Civil Engineering (Minor in CSE)",
             institute: "Indian Institute of Technology, Jammu",
             year: "2024 - 2028",
-            score: "CGPA: 9.03 (Current)",
+            score: "CGPA: 9.13 (Current)",
             details: [
                 "Department Rank 1",
-                "Academic Excellence Award for 3 consecutive semesters"
+                "Academic Excellence Award for 4 consecutive semesters"
             ]
         },
         {
@@ -40,7 +40,7 @@ export default function Education() {
     return (
         <section id="education" className="py-20 px-6 md:px-20 lg:px-32">
             <h2 className="font-sans text-3xl font-bold text-foreground mb-12 flex items-center animate-slide-in-left">
-                <span className="text-warm-orange mr-2">02.</span> Education & Achievements
+                <span className="text-warm-orange mr-2">01.</span> Education & Achievements
                 <span className="h-px bg-muted flex-grow ml-6 max-w-xs"></span>
             </h2>
 
@@ -79,7 +79,7 @@ export default function Education() {
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="p-4 bg-secondary/50 rounded-lg text-center hover-lift">
-                                <div className="text-3xl font-bold text-warm-orange">300+</div>
+                                <div className="text-3xl font-bold text-warm-orange">400+</div>
                                 <div className="text-xs text-muted-foreground mt-1">LeetCode Problems</div>
                             </div>
                             <div className="p-4 bg-secondary/50 rounded-lg text-center hover-lift">

@@ -11,9 +11,9 @@ export default function Home() {
   
   const featuredProjects = [
     {
-      title: "StayNest",
-      description: "A full-stack accommodation marketplace inspired by Airbnb. Built with a production-grade backend architecture featuring MVC patterns, role-based access control, and robust security implementation. Includes session management, review systems, and centralized error handling.",
-      techStack: ["MongoDB", "Express.js", "Node.js", "Passport.js"],
+      title: "StayNest | Full-Stack Accommodation Marketplace",
+      description: "An Airbnb-inspired property marketplace built on the MEN stack following strict MVC architecture. Implements session-based authentication and owner-based authorization via Passport.js, RESTful CRUD APIs with Joi validation, centralized error handling, and a responsive EJS/Bootstrap UI hardened with HTTP-only sessions and Helmet security headers.",
+      techStack: ["MongoDB", "Express.js", "Node.js", "Passport.js", "EJS", "Bootstrap"],
       engineering: ["MVC Architecture", "Session Auth", "Joi Validation", "Error Handling Utility"],
       github: "https://github.com/hrshagarwal/StayNest",
       link: null,
@@ -22,31 +22,36 @@ export default function Home() {
     },
     {
       title: "Productivity Regulation System",
-      description: "National Winner of Smart India Hackathon (SIH) 2025. A governance platform for the Ministry of Jal Shakti to replace subjective evaluations with KPI-based productivity scoring. Features automated reporting, role-specific metrics, and audit trails.",
-      techStack: ["MERN Stack", "Data Analytics", "Role-Based Access"],
-      engineering: ["Real-time Reporting", "Complex Scoring Algorithms", "Gov-Tech Security"],
-      github: null, // Private
-      link: null, // Private
-      status: "SIH National Winner - Problem ID 25250",
+      description: "National Winner of Smart India Hackathon (SIH) 2025. A governance platform for the Ministry of Jal Shakti to replace subjective evaluations with KPI-based productivity scoring. Now architecting the production backend as a Software Development Intern at Brahmaputra Board. Features CSV-based data ingestion from eOffice, AEBAS & PFMS, role-specific KPI computation across four officer tracks, and secure e-Pramaan OAuth SSO with JWT-based RBAC.",
+      techStack: ["Node.js", "Express.js", "MongoDB", "PostgreSQL", "Role-Based Access"],
+      engineering: ["Real-time Reporting", "Complex Scoring Algorithms", "Gov-Tech Security", "OAuth SSO"],
+      github: null,
+      link: null,
+      status: "SIH National Winner — Now in Production (Internship)",
       video: false,
       image: "/images/Sih2.jpeg",
       hideImage: true
     },
     {
-      title: "Software Defined Networking with Post-Quantum Cryptography to Optimise Traffic Management System",
-      description: "Spearheaded a research initiative under Prof. Sarada Prasad at IIT Jammu to address the critical vulnerability of Software-Defined Networks (SDN) to potential quantum computing attacks. Developed and simulated a novel security framework by integrating Post-Quantum Cryptography (PQC) algorithms—specifically the NIST-standardized CRYSTALS-Kyber—into the SDN controller's communication protocol. This framework ensures forward secrecy and secures the control plane against 'harvest now, decrypt later' threats without compromising network latency. Furthermore, designed an intelligent traffic management algorithm that dynamically reroutes flows based on real-time congestion metrics, achieving a substantial optimization in bandwidth utilization and reducing packet drop rates during high-load scenarios.",
-      techStack: ["Python", "SDN Controllers", "Cryptography"],
-      engineering: ["Network Security", "Research Analysis", "Traffic Optimization"],
-      github: null,
+      title: "LoanSense-AI: ML-Based Loan Approval System",
+      description: "An end-to-end ML pipeline for loan approval prediction, training and evaluating KNN, Logistic Regression, and Naive Bayes models. Engineered 28 features across 1,000+ records through data preprocessing, missing value imputation, and categorical encoding. Evaluated using Accuracy, F1-Score, and ROC-AUC — identifying Credit Score and DTI Ratio as top predictors — with explainable AI principles for transparent, fair lending decisions.",
+      techStack: ["Python", "scikit-learn", "Pandas", "Seaborn", "Logistic Regression", "KNN"],
+      engineering: ["ML Pipeline", "Feature Engineering", "Model Evaluation", "Explainable AI"],
+      github: "https://github.com/hrshagarwal/LoanSense-AI",
       link: null,
-      status: "Ongoing Research",
+      status: "June 2026",
       video: false,
-      research: false,
       hideImage: true
     }
   ];
 
   const otherProjects = [
+    {
+      title: "SDN + Post-Quantum Cryptography",
+      description: "Research initiative integrating NIST-standardized CRYSTALS-Kyber into SDN controllers to secure the control plane against quantum attacks. Ongoing under Prof. Sarada Prasad Gocchayat at IIT Jammu.",
+      techStack: ["Python", "Mininet", "SDN", "Cryptography"],
+      github: null
+    },
     {
       title: "Classical Cipher GUI",
       description: "A graphical tool for visualizing and executing various classical encryption techniques for educational purposes.",
@@ -70,6 +75,43 @@ export default function Home() {
       <About />
       
       <Education />
+
+      {/* Experience Section */}
+      <section id="experience" className="py-20 px-6 md:px-20 lg:px-32">
+        <h2 className="font-sans text-3xl font-bold text-foreground mb-12 flex items-center animate-slide-in-left">
+          <span className="text-warm-orange mr-2">02.</span> Experience
+          <span className="h-px bg-muted flex-grow ml-6 max-w-xs"></span>
+        </h2>
+        <div className="glass-panel p-8 rounded-lg border-l-4 border-primary hover-lift">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-3 gap-2">
+            <div>
+              <h3 className="text-xl font-bold text-foreground">Software Development Intern</h3>
+              <p className="text-primary font-medium text-sm mt-1">Brahmaputra Board, Ministry of Jal Shakti (Govt. of India) · Hybrid</p>
+            </div>
+            <span className="font-mono text-xs text-muted-foreground bg-secondary px-3 py-1 rounded whitespace-nowrap self-start">May 2026 — Present</span>
+          </div>
+
+          <div className="mt-4 flex flex-col lg:flex-row gap-8 items-start">
+            {/* Bullet points */}
+            <ul className="space-y-3 text-sm text-muted-foreground list-disc list-inside flex-1">
+              <li>Architecting production backend for a Smart India Hackathon-winning Government Productivity Management System, designing CSV-based data ingestion from eOffice, AEBAS, and PFMS with RESTful APIs built using Node.js, Express.js, MongoDB, and PostgreSQL.</li>
+              <li>Designing a role-specific KPI computation engine across four officer tracks (Administrative, Technical, Field, Finance), replacing subjective annual appraisals with data-driven scoring from real-time government system signals.</li>
+              <li>Collaborated directly with Ministry stakeholders on requirement gathering, workflow mapping, and SRS authoring, translating a 195-employee statutory body&apos;s operations into a scalable system architecture.</li>
+              <li>Implementing secure authentication via Government e-Pramaan/eOffice OAuth SSO with JWT-based session management and hierarchy-aware RBAC across 6+ role levels.</li>
+            </ul>
+
+            {/* Certificate / Trophy photo */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <div className="lg:w-64 w-full flex-shrink-0 rounded-lg overflow-hidden border border-white/10 shadow-lg group">
+              <img
+                src="/images/certifiacte_trophy.jpg"
+                alt="Internship Certificate and Trophy"
+                className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
       <Skills />
 

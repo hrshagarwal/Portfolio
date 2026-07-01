@@ -1,45 +1,27 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Briefcase, Camera, Code, Megaphone, Utensils } from "lucide-react";
+import { Users, Briefcase, Code } from "lucide-react";
 
 export default function Responsibilities() {
     const roles = [
         {
-            title: "Branch Executive",
-            org: "Training & Placement Cell, IIT Jammu",
+            title: "Portal Head",
+            org: "Training & Placement Cell (Career & Development Services), IIT Jammu",
             icon: <Briefcase className="w-6 h-6 text-warm-orange" />,
-            desc: "Managed placement activities and career development services."
+            desc: "Leading portal development and career development services for students."
         },
         {
             title: "Sponsorship & Outreach Head",
             org: "Coding Club, IIT Jammu",
             icon: <Code className="w-6 h-6 text-sage-green" />,
-            desc: "Led sponsorship drives and outreach initiatives."
-        },
-        {
-            title: "Outreach & PR Lead",
-            org: "Photography Club (Chitraka), IIT Jammu",
-            icon: <Camera className="w-6 h-6 text-terracotta" />,
-            desc: "Handled public relations and club visibility."
+            desc: "Led sponsorship drives and outreach initiatives for the coding club."
         },
         {
             title: "Competitive Programming Mentor",
             org: "Coding Club, IIT Jammu",
             icon: <Users className="w-6 h-6 text-warm-orange-light" />,
-            desc: "Mentored juniors in algorithms and data structures."
-        },
-        {
-            title: "Public Relations Team",
-            org: "Pragyaan",
-            icon: <Megaphone className="w-6 h-6 text-cream" />,
-            desc: "Coordinated PR activities for the event."
-        },
-        {
-            title: "Content Head",
-            org: "Food Tinkers, IIT Jammu",
-            icon: <Utensils className="w-6 h-6 text-soft-peach" />,
-            desc: "Oversaw content strategy and creation."
+            desc: "Mentoring juniors in algorithms, data structures, and competitive programming."
         }
     ];
 
