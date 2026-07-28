@@ -1,55 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
-import { Github, Linkedin, Mail, ArrowDown, Phone } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowDown } from "lucide-react";
 
-const ROLES = [
-  "Backend Engineer",
-  "SIH 2025 National Winner",
-  "Full-Stack Developer",
-  "ML Practitioner",
-];
-
-function useTypewriter(words, typeSpeed = 85, deleteSpeed = 40, pause = 1800) {
-  const [index, setIndex] = useState(0);
-  const [text, setText] = useState("");
-  const [deleting, setDeleting] = useState(false);
-
-  useEffect(() => {
-    const current = words[index % words.length];
-
-    // Finished typing the word — hold, then start deleting.
-    if (!deleting && text === current) {
-      const t = setTimeout(() => setDeleting(true), pause);
-      return () => clearTimeout(t);
-    }
-
-    // Finished deleting — advance to the next word.
-    if (deleting && text === "") {
-      const t = setTimeout(() => {
-        setDeleting(false);
-        setIndex((i) => (i + 1) % words.length);
-      }, 220);
-      return () => clearTimeout(t);
-    }
-
-    const t = setTimeout(
-      () => {
-        setText((prev) =>
-          deleting
-            ? current.slice(0, prev.length - 1)
-            : current.slice(0, prev.length + 1)
-        );
-      },
-      deleting ? deleteSpeed : typeSpeed
-    );
-    return () => clearTimeout(t);
-  }, [text, deleting, index, words, typeSpeed, deleteSpeed, pause]);
-
-  return text;
-}
+const ROLES = ["Backend Engineer", "Full-Stack Developer", "ML Practitioner"];
 
 const socials = [
   {
@@ -70,17 +25,9 @@ const socials = [
     label: "Email",
     external: false,
   },
-  {
-    href: "tel:+919664317039",
-    icon: Phone,
-    label: "Phone",
-    external: false,
-  },
 ];
 
 export default function Hero() {
-  const typed = useTypewriter(ROLES);
-
   return (
     <section
       id="hero"
@@ -160,15 +107,19 @@ export default function Hero() {
         </span>
       </motion.h1>
 
-      {/* Typewriter role line */}
+      {/* Role line */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="text-xl md:text-3xl font-mono text-primary mb-4 h-10 flex items-center"
+        className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xl md:text-3xl font-mono text-primary mb-4"
       >
-        <span>{typed}</span>
-        <span className="inline-block w-[2px] h-7 md:h-8 bg-primary ml-1 animate-pulse" />
+        {ROLES.map((role, i) => (
+          <span key={role} className="flex items-center gap-x-3">
+            {i > 0 && <span className="text-muted-foreground/40">·</span>}
+            {role}
+          </span>
+        ))}
       </motion.div>
 
       <motion.p

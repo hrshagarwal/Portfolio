@@ -30,30 +30,9 @@ const featuredProjects = [
       "Resemblyzer",
       "Supabase",
     ],
-    github: "https://github.com/hrshagarwal/",
+    github: "https://github.com/hrshagarwal/ProxZero",
     link: null,
     status: "2026",
-  },
-  {
-    title: "Government Productivity Management System",
-    year: "2025 – Present",
-    description:
-      "National Winner of Smart India Hackathon 2025. A governance platform for the Ministry of Jal Shakti that replaces subjective annual appraisals with KPI-based productivity scoring. Now being built out as production software during my internship at Brahmaputra Board.",
-    highlights: [
-      "CSV-based data ingestion from national platforms — eOffice, AEBAS, and PFMS — feeding a role-specific KPI computation engine across four officer tracks.",
-      "Secure authentication via Government e-Pramaan/eOffice OAuth SSO with JWT session management and hierarchy-aware RBAC across 6+ role levels.",
-    ],
-    techStack: [
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "PostgreSQL",
-      "OAuth SSO",
-      "JWT",
-    ],
-    github: null,
-    link: null,
-    status: "SIH National Winner · In Production",
   },
   {
     title: "StayNest — Full-Stack Accommodation Marketplace",
@@ -77,6 +56,27 @@ const featuredProjects = [
     link: null,
     status: "Deployment in Progress",
     video: "/videos/staynest.mp4",
+  },
+  {
+    title: "Government Productivity Management System",
+    year: "2025 – Present",
+    description:
+      "National Winner of Smart India Hackathon 2025. A governance platform for the Ministry of Jal Shakti that replaces subjective annual appraisals with KPI-based productivity scoring. Now being built out as production software during my internship at Brahmaputra Board.",
+    highlights: [
+      "CSV-based data ingestion from national platforms — eOffice, AEBAS, and PFMS — feeding a role-specific KPI computation engine across four officer tracks.",
+      "Secure authentication via Government e-Pramaan/eOffice OAuth SSO with JWT session management and hierarchy-aware RBAC across 6+ role levels.",
+    ],
+    techStack: [
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "PostgreSQL",
+      "OAuth SSO",
+      "JWT",
+    ],
+    github: null,
+    link: null,
+    status: "SIH National Winner · In Production",
   },
   {
     title: "LoanSense-AI — ML-Based Loan Approval System",

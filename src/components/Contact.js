@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Phone, ArrowUpRight } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
 
 const channels = [
   {
@@ -9,13 +9,6 @@ const channels = [
     label: "Email",
     value: "2024uce0050@iitjammu.ac.in",
     href: "mailto:2024uce0050@iitjammu.ac.in",
-    external: false,
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+91 96643 17039",
-    href: "tel:+919664317039",
     external: false,
   },
   {
@@ -75,7 +68,7 @@ export default function Contact() {
         </a>
 
         {/* Contact channels */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-14 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-14 text-left">
           {channels.map(({ icon: Icon, label, value, href, external }, i) => (
             <motion.a
               key={label}

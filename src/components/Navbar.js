@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { motion, useScroll, AnimatePresence } from "framer-motion";
-import { Menu, X, FileText } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { name: "About", to: "about" },
@@ -92,15 +92,6 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-sm font-medium px-4 py-1.5 rounded-lg border border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              Resume
-            </a>
           </div>
 
           {/* Mobile toggle */}
@@ -144,18 +135,6 @@ export default function Navbar() {
                 </Link>
               </motion.div>
             ))}
-            <motion.a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.06 * navLinks.length, duration: 0.35 }}
-              className="mt-4 flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium"
-            >
-              <FileText className="w-4 h-4" />
-              Resume
-            </motion.a>
           </motion.div>
         )}
       </AnimatePresence>
