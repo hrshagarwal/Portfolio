@@ -2,117 +2,146 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink, Github, FolderGit2 } from "lucide-react";
-import Image from "next/image";
 
 export default function FeaturedProject({ project, index }) {
   const isEven = index % 2 === 0;
-  const isDeAccentuated = project.deAccentuated;
+  const hasMedia = Boolean(project.video || project.image);
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 50 }}
+    <motion.article
+      initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.5 }}
-      className={`relative grid grid-cols-12 gap-y-8 items-center mb-32 ${isEven ? "" : "text-right"} ${isDeAccentuated ? "opacity-60 hover:opacity-80 transition-opacity" : ""}`}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="glass-panel rounded-2xl overflow-hidden group"
     >
-      {/* Project Image Content */}
-      {!project.hideImage && (
-        <div className={`col-span-12 md:col-span-7 relative ${isEven ? "md:col-start-1" : "md:col-start-6 z-10"}`}>
-           <div className="relative h-[300px] md:h-[400px] w-full rounded-lg overflow-hidden glass-panel group shadow-2xl hover-glow">
-              {/* Overlay - Hidden for videos to allow interaction */}
-              <div className={`absolute inset-0 bg-background/40 group-hover:bg-transparent transition-all duration-300 z-10 ${project.video && typeof project.video === 'string' ? 'hidden' : ''}`} />
-              
-              {/* Placeholder for project image/video */}
-               <div className="w-full h-full bg-secondary flex items-center justify-center border border-white/5 overflow-hidden">
-                  {project.image ? (
-                      /* Project Image */
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img 
-                          src={project.image} 
-                          alt={project.title} 
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                  ) : project.video ? (
-                    typeof project.video === 'string' ? (
-                        <video 
-                            src={project.video} 
-                            controls
-                            playsInline
-                            className="w-full h-full object-cover"
-                        >
-                            Your browser does not support the video tag.
-                        </video>
-                    ) : (
-                        <div className="text-muted-foreground flex flex-col items-center gap-2">
-                            <FolderGit2 className="w-12 h-12 opacity-50" />
-                            <span className="text-sm font-mono">Demo Video Placeholder</span>
-                        </div>
-                    )
-                  ) : (
-                      <div className="text-muted-foreground font-mono text-4xl font-bold opacity-10">
-                          {project.title}
-                      </div>
-                  )}
-               </div>
-           </div>
-        </div>
-      )}
-  
-      {/* Project Text Content - Expands if hideImage is true */}
-      <div className={`relative z-20 ${project.hideImage ? "col-span-12 text-left" : `col-span-12 md:col-span-6 ${isEven ? "md:col-start-7 md:text-right" : "md:col-start-1 md:row-start-1 md:text-left"}`}`}>
-        <p className={`font-mono text-sm mb-2 ${isDeAccentuated ? "text-muted-foreground" : "text-warm-orange"}`}>
-          {isDeAccentuated ? "Ongoing Research" : "Featured Project"}
-        </p>
-        <h3 className={`font-sans font-bold text-foreground mb-6 hover:text-warm-orange transition-colors ${isDeAccentuated ? "text-xl" : "text-3xl"}`}>
-            {project.title}
-        </h3>
-        
-        <div className={`glass-panel p-6 rounded-lg text-muted-foreground leading-relaxed shadow-xl mb-6 hover-lift ${isDeAccentuated ? "text-xs" : "text-sm"}`}>
-            <p>{project.description}</p>
-        </div>
-
-        {project.engineering && !isDeAccentuated && (
-            <div className={`flex flex-wrap gap-2 mb-6 text-xs font-mono text-muted-foreground ${isEven ? "justify-end" : "justify-start"}`}>
-                {project.engineering.map((tech, i) => (
-                    <span key={i} className="text-sage-green">• {tech}</span>
-                ))}
-            </div>
-        )}
-
-        <ul className={`flex flex-wrap gap-4 font-mono text-muted-foreground/80 mb-8 ${isEven ? "justify-end" : "justify-start"} ${isDeAccentuated ? "text-xs opacity-70" : "text-xs"}`}>
-            {project.techStack.map((tech, i) => (
-                <li key={i}>{tech}</li>
-            ))}
-        </ul>
-
-        {!isDeAccentuated && (
-          <div className={`flex items-center gap-4 ${isEven ? "justify-end" : "justify-start"}`}>
-              {project.github && (
-                  <a href={project.github} className="text-foreground hover:text-warm-orange transition-colors">
-                      <Github className="w-6 h-6" />
-                  </a>
-              )}
-              {project.link && (
-                  <a href={project.link} className="text-foreground hover:text-warm-orange transition-colors">
-                      <ExternalLink className="w-6 h-6" />
-                  </a>
-              )}
+      <div
+        className={`grid grid-cols-1 ${
+          hasMedia ? "lg:grid-cols-2" : ""
+        } gap-0 items-stretch`}
+      >
+        {/* ── Media ──────────────────────────────────────── */}
+        {hasMedia && (
+          <div
+            className={`relative min-h-[260px] lg:min-h-[380px] bg-secondary/60 overflow-hidden ${
+              isEven ? "" : "lg:order-2"
+            }`}
+          >
+            {project.video ? (
+              <video
+                src={project.video}
+                controls
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover"
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={project.image}
+                alt={project.title}
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+              />
+            )}
           </div>
         )}
-        
-        {project.status && (
-             <div className={`mt-4 ${isEven ? "text-right" : "text-left"}`}>
-                <span className={`inline-block px-3 py-1 text-xs rounded-full ${
-                  isDeAccentuated 
-                    ? "border border-muted/30 text-muted-foreground bg-secondary/20" 
-                    : "border border-warm-orange/30 text-warm-orange bg-warm-orange/5"
-                }`}>
-                    {project.status}
-                </span>
-             </div>
-        )}
+
+        {/* ── Content ────────────────────────────────────── */}
+        <div
+          className={`p-7 md:p-9 flex flex-col justify-center ${
+            !hasMedia ? "lg:px-12" : ""
+          } ${isEven ? "" : "lg:order-1"}`}
+        >
+          <div className="flex items-center gap-3 mb-3 flex-wrap">
+            <span className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
+              Featured Project
+            </span>
+            {project.year && (
+              <span className="font-mono text-xs text-muted-foreground">
+                {project.year}
+              </span>
+            )}
+          </div>
+
+          <h3 className="font-sans text-2xl md:text-3xl font-bold text-foreground mb-4 leading-tight">
+            {project.title}
+          </h3>
+
+          <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-5">
+            {project.description}
+          </p>
+
+          {/* Engineering highlights */}
+          {project.highlights?.length > 0 && (
+            <ul className="space-y-2 mb-5">
+              {project.highlights.map((point) => (
+                <li
+                  key={point}
+                  className="flex items-start gap-2.5 text-sm text-muted-foreground"
+                >
+                  <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-sage-green flex-shrink-0" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {/* Tech stack */}
+          <ul className="flex flex-wrap gap-2 mb-6">
+            {project.techStack.map((tech) => (
+              <li
+                key={tech}
+                className="px-2.5 py-1 text-[11px] font-mono rounded-md bg-secondary/70 text-muted-foreground border border-border"
+              >
+                {tech}
+              </li>
+            ))}
+          </ul>
+
+          {/* Links + status */}
+          <div className="flex items-center gap-4 flex-wrap mt-auto">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} on GitHub`}
+                className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                <Github className="w-[18px] h-[18px]" />
+                Code
+              </a>
+            )}
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} live demo`}
+                className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                <ExternalLink className="w-[18px] h-[18px]" />
+                Live
+              </a>
+            )}
+            {!project.github && !project.link && (
+              <span className="flex items-center gap-1.5 text-sm text-muted-foreground/70">
+                <FolderGit2 className="w-[18px] h-[18px]" />
+                Private repository
+              </span>
+            )}
+
+            {project.status && (
+              <span className="ml-auto inline-block px-3 py-1 text-[11px] font-medium rounded-full border border-primary/30 text-primary bg-primary/5">
+                {project.status}
+              </span>
+            )}
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
