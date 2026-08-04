@@ -31,8 +31,8 @@ const featuredProjects = [
       "Supabase",
     ],
     github: "https://github.com/hrshagarwal/ProxZero",
-    link: null,
-    status: "2026",
+    link: "https://proxzero.streamlit.app",
+    status: "Live",
   },
   {
     title: "StayNest — Full-Stack Accommodation Marketplace",
