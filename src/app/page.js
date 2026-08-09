@@ -13,14 +13,15 @@ import SectionHeading from "@/components/SectionHeading";
 
 const featuredProjects = [
   {
-    title: "ProxZero — AI-Powered Classroom Attendance System",
+    title: "ProxZero — Biometric Classroom Attendance System",
     year: "2026",
     description:
-      "A full-stack attendance platform that automates roll-call via face recognition, replacing manual attendance with a single classroom photo scan and cutting attendance-taking time from minutes to seconds.",
+      "An attendance platform that replaces gameable roll-call with two biometric signals. A teacher points a camera at the room — or records ten seconds of the class speaking — and ProxZero resolves who showed up, surfacing every result for review before anything is written to the log.",
     highlights: [
-      "Computer vision pipeline using dlib's 128-dimensional face-embedding model, with an on-demand linear SVM classifier trained per class and a tuned L2-distance threshold (0.6) to minimise false positives.",
-      "Secondary voice-recognition mode built on Resemblyzer speaker embeddings and Librosa audio segmentation (30 dB silence split), enabling multi-student attendance from one classroom recording at 0.65 cosine-similarity confidence.",
-      "Role-based teacher/student dashboards across 5+ relational tables on Supabase (PostgreSQL), with bcrypt-secured auth and QR-code/deep-link self-enrollment.",
+      "Face pipeline built on dlib — HOG detection, 68-point landmark alignment, and a ResNet mapping each face to a 128-dimensional embedding — with models cached as Streamlit resources so the network loads once rather than on every rerun.",
+      "Matching gated on two independent checks: an L2 distance ceiling tightened from the 0.6 community default to 0.42 after 0.6 proved loose enough to mark the wrong student present, plus a 0.08 nearest-rival margin that abstains on look-alike students instead of guessing between them.",
+      "Voice mode using Resemblyzer 256-d speaker embeddings over Librosa 30 dB silence segmentation, scoring one classroom recording into per-speaker chunks at 0.65 cosine similarity and judging each student on their clearest utterance.",
+      "Role-based teacher/student dashboards across 5+ relational tables on Supabase (PostgreSQL), with bcrypt-hashed teacher auth, passwordless face login for students, and QR-code/deep-link self-enrollment that survives the login round-trip.",
     ],
     techStack: [
       "Python",

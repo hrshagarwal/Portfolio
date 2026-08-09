@@ -102,9 +102,7 @@ export default function Hero() {
         transition={{ delay: 0.22 }}
         className="text-5xl md:text-7xl font-bold mb-4 font-sans tracking-tight"
       >
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-indigo-800 to-indigo-500 animate-text-gradient">
-          Harsh Agarwal
-        </span>
+        <span className="text-foreground">Harsh Agarwal</span>
       </motion.h1>
 
       {/* Role line */}
