@@ -2,10 +2,16 @@
 
 import { motion } from "framer-motion";
 import { ExternalLink, Github, FolderGit2 } from "lucide-react";
+import ThresholdDemo from "@/components/ThresholdDemo";
+
+const DEMOS = {
+  threshold: ThresholdDemo,
+};
 
 export default function FeaturedProject({ project, index }) {
   const isEven = index % 2 === 0;
-  const hasMedia = Boolean(project.video || project.image);
+  const Demo = project.demo ? DEMOS[project.demo] : null;
+  const hasMedia = Boolean(project.video || project.image || Demo);
 
   return (
     <motion.article
@@ -23,11 +29,13 @@ export default function FeaturedProject({ project, index }) {
         {/* ── Media ──────────────────────────────────────── */}
         {hasMedia && (
           <div
-            className={`relative min-h-[260px] lg:min-h-[380px] bg-secondary/60 overflow-hidden ${
-              isEven ? "" : "lg:order-2"
-            }`}
+            className={`relative bg-secondary/60 overflow-hidden ${
+              Demo ? "" : "min-h-[260px] lg:min-h-[380px]"
+            } ${isEven ? "" : "lg:order-2"}`}
           >
-            {project.video ? (
+            {Demo ? (
+              <Demo />
+            ) : project.video ? (
               <video
                 src={project.video}
                 controls

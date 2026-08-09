@@ -34,6 +34,7 @@ const featuredProjects = [
     github: "https://github.com/hrshagarwal/ProxZero",
     link: "https://proxzero.streamlit.app",
     status: "Live",
+    demo: "threshold",
   },
   {
     title: "StayNest — Full-Stack Accommodation Marketplace",

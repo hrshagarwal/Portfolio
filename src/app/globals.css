@@ -180,6 +180,26 @@
     box-shadow: 0 0 32px hsla(248, 58%, 42%, 0.22);
   }
 
+  /* ── Static gradient text ────────────────────────────── */
+  /* Painted once, not animated. Mirrors the aurora blob hues
+     behind the hero (indigo → sage → terracotta). */
+  .text-gradient-warm {
+    background-image: linear-gradient(
+      100deg,
+      var(--accent-indigo-dark) 0%,
+      var(--accent-indigo) 38%,
+      var(--sage-green) 72%,
+      var(--terracotta) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* Fallback for engines that don't clip backgrounds to text */
+    @supports not (background-clip: text) {
+      color: var(--accent-indigo);
+    }
+  }
+
   /* ── Entry animations ────────────────────────────────── */
   .animate-fade-in { animation: fadeIn 0.8s ease-out both; }
   .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
