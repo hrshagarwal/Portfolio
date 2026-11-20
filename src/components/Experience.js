@@ -5,10 +5,10 @@ import { Building2 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
 const bullets = [
-  "Architected the production backend for a Smart India Hackathon-winning Government Productivity Management System, building RESTful APIs with Node.js, Express.js, MongoDB, and PostgreSQL to ingest data from national platforms — eOffice, AEBAS, and PFMS.",
-  "Designed a role-specific KPI computation engine across four officer tracks (Administrative, Technical, Field, Finance), replacing subjective annual appraisals with data-driven scoring from real-time government system signals.",
-  "Partnered directly with Ministry stakeholders on requirement gathering and SRS authoring, translating a 195-employee statutory body's operations into a scalable system architecture.",
-  "Building secure authentication via Government e-Pramaan/eOffice OAuth SSO with JWT session management and hierarchy-aware RBAC, enforcing data access control across 6+ role levels.",
+  "Taking our Smart India Hackathon 2025-winning prototype to production as backend developer of a performance management system for the Board's 195 employees; drafted the SRS with Ministry stakeholders.",
+  "Building REST APIs in Node.js and Express.js over PostgreSQL and MongoDB that ingest records from government platforms: eOffice (file movement), AEBAS (biometric attendance) and PFMS (finance).",
+  "Designed a KPI scoring engine with separate metrics for four officer tracks (Administrative, Technical, Field, Finance) that scores officers from these system records instead of manual annual appraisals.",
+  "Implementing single sign-on through e-Pramaan/eOffice OAuth, with JWT sessions and hierarchy-aware RBAC that scopes data access by an officer's position across 6+ role levels.",
 ];
 
 export default function Experience() {
@@ -34,7 +34,7 @@ export default function Experience() {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-foreground leading-snug">
-                  Software Development Intern
+                  Software Developer Intern
                 </h3>
                 <p className="text-primary font-medium text-sm mt-1">
                   Brahmaputra Board, Ministry of Jal Shakti (Govt. of India)

@@ -41,10 +41,12 @@ const tags = [
   "JavaScript",
   "Node.js",
   "Express.js",
-  "React.js",
-  "MongoDB",
   "PostgreSQL",
-  "scikit-learn",
+  "MongoDB",
+  "Redis",
+  "Docker",
+  "AWS",
+  "PyTorch",
 ];
 
 export default function About() {
@@ -76,12 +78,12 @@ export default function About() {
           <p>
             I picked up programming from scratch in my first year and
             haven&apos;t stopped since. Right now I&apos;m a Software
-            Development Intern at the{" "}
+            Developer Intern at the{" "}
             <span className="text-foreground font-medium">
               Brahmaputra Board (Ministry of Jal Shakti)
             </span>
-            , architecting the production backend for a government productivity
-            system — the same project that won Smart India Hackathon 2025.
+            , taking a government performance management system to production as
+            backend developer — the same project that won Smart India Hackathon 2025.
           </p>
           <p>
             I care about systems that hold up under real users: clean

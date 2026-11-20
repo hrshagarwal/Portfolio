@@ -1,17 +1,62 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, FolderGit2 } from "lucide-react";
+import { ExternalLink, Github, FolderGit2, Play } from "lucide-react";
 import ThresholdDemo from "@/components/ThresholdDemo";
 
 const DEMOS = {
   threshold: ThresholdDemo,
 };
 
+// Shows the YouTube thumbnail first and loads the player only on click,
+// so the page doesn't pull YouTube's scripts for every visitor.
+function YouTubeEmbed({ id, title }) {
+  const [playing, setPlaying] = useState(false);
+
+  if (playing) {
+    return (
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
+        title={`${title} demo video`}
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        className="absolute inset-0 w-full h-full"
+      />
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => setPlaying(true)}
+      aria-label={`Play ${title} demo video`}
+      className="absolute inset-0 w-full h-full group/play cursor-pointer"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+        alt=""
+        loading="lazy"
+        className="w-full h-full object-cover transition-transform duration-700 group-hover/play:scale-[1.04]"
+      />
+      <span className="absolute inset-0 bg-black/25 group-hover/play:bg-black/15 transition-colors" />
+      <span className="absolute inset-0 flex items-center justify-center">
+        <span className="flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-primary-foreground font-medium shadow-xl shadow-black/30 group-hover/play:scale-105 transition-transform">
+          <Play className="w-5 h-5 fill-current" />
+          Watch demo
+        </span>
+      </span>
+    </button>
+  );
+}
+
 export default function FeaturedProject({ project, index }) {
   const isEven = index % 2 === 0;
   const Demo = project.demo ? DEMOS[project.demo] : null;
-  const hasMedia = Boolean(project.video || project.image || Demo);
+  const hasMedia = Boolean(
+    project.video || project.image || project.youtube || Demo
+  );
 
   return (
     <motion.article
@@ -29,12 +74,15 @@ export default function FeaturedProject({ project, index }) {
         {/* ── Media ──────────────────────────────────────── */}
         {hasMedia && (
           <div
+            style={project.mediaBg ? { background: project.mediaBg } : undefined}
             className={`relative bg-secondary/60 overflow-hidden ${
               Demo ? "" : "min-h-[260px] lg:min-h-[380px]"
             } ${isEven ? "" : "lg:order-2"}`}
           >
             {Demo ? (
               <Demo />
+            ) : project.youtube ? (
+              <YouTubeEmbed id={project.youtube} title={project.title} />
             ) : project.video ? (
               <video
                 src={project.video}
@@ -49,9 +97,9 @@ export default function FeaturedProject({ project, index }) {
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={project.image}
-                alt={project.title}
+                alt={project.imageAlt || project.title}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
               />
             )}
           </div>

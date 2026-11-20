@@ -15,13 +15,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://harshagarwal.vercel.app"),
+  metadataBase: new URL("https://harshagarwaliitj.vercel.app"),
   title: {
     default: "Harsh Agarwal | Backend Engineer & IIT Jammu",
     template: "%s | Harsh Agarwal",
   },
   description:
-    "B.Tech Civil Engineering with Minor in CSE at IIT Jammu. Backend-focused engineer, Smart India Hackathon 2025 National Winner, and Software Development Intern at Brahmaputra Board (Ministry of Jal Shakti).",
+    "B.Tech Civil Engineering with Minor in CSE at IIT Jammu. Backend-focused engineer, Smart India Hackathon 2025 National Winner, and Software Developer Intern at Brahmaputra Board (Ministry of Jal Shakti).",
   keywords: [
     "Harsh Agarwal",
     "IIT Jammu",
@@ -32,6 +32,9 @@ export const metadata = {
     "Express.js",
     "MongoDB",
     "PostgreSQL",
+    "Docker",
+    "AWS",
+    "Redis",
     "Machine Learning",
   ],
   authors: [{ name: "Harsh Agarwal" }],
