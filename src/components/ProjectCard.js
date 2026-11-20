@@ -1,29 +1,34 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Folder, ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 
-export default function ProjectCard({ project }) {
+const COLORS = ["pink", "teal", "amber", "blue", "violet", "lime"];
+
+export default function ProjectCard({ project, index = 0 }) {
+  const c = COLORS[index % COLORS.length];
+  const tilt = [-1.5, 1, -0.8][index % 3];
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30, rotate: 0 }}
+      whileInView={{ opacity: 1, y: 0, rotate: tilt }}
+      whileHover={{ rotate: 0, y: -4 }}
       viewport={{ once: true, margin: "-60px" }}
-      whileHover={{ y: -6 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="glass-panel p-6 rounded-xl h-full flex flex-col group"
+      transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.06 }}
+      className="brut p-6 h-full flex flex-col"
+      style={{ "--shadow": `var(--${c})` }}
     >
-      <div className="flex justify-between items-center mb-5">
-        <Folder className="w-9 h-9 text-primary group-hover:scale-110 transition-transform duration-300" />
-
-        <div className="flex items-center gap-3">
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="font-display font-extrabold text-2xl text-paper leading-tight">{project.title}</h3>
+        <div className="flex gap-2 shrink-0 pt-1">
           {project.github && (
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} on GitHub`}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-paper/70 hover:text-paper transition-colors"
             >
               <Github className="w-5 h-5" />
             </a>
@@ -34,32 +39,24 @@ export default function ProjectCard({ project }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${project.title} live demo`}
-              className="text-muted-foreground hover:text-primary transition-colors"
+              className="text-paper/70 hover:text-paper transition-colors"
             >
               <ExternalLink className="w-5 h-5" />
             </a>
           )}
         </div>
       </div>
-
-      <h3 className="font-sans text-lg font-bold text-foreground mb-2.5 group-hover:text-primary transition-colors">
-        {project.title}
-      </h3>
-
-      <p className="text-muted-foreground text-sm leading-relaxed mb-5 flex-grow">
-        {project.description}
+      <p className="font-mono text-xs mt-1" style={{ color: `var(--${c})` }}>
+        {project.tagline}
       </p>
-
-      <ul className="flex flex-wrap gap-2 mt-auto">
-        {project.techStack.map((tech) => (
-          <li
-            key={tech}
-            className="px-2 py-0.5 text-[11px] font-mono rounded bg-secondary/70 text-muted-foreground border border-border"
-          >
-            {tech}
-          </li>
+      <p className="text-paper/80 text-sm leading-relaxed mt-4 flex-grow">{project.description}</p>
+      <div className="flex flex-wrap gap-2 mt-5">
+        {project.techStack.map((t) => (
+          <span key={t} className="tag">
+            {t}
+          </span>
         ))}
-      </ul>
+      </div>
     </motion.div>
   );
 }

@@ -1,145 +1,87 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, GraduationCap, Trophy, Code2 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
-const highlights = [
-  {
-    icon: GraduationCap,
-    tone: "text-primary",
-    label: "CGPA",
-    value: "9.13 / 10",
-    sub: "Dept. Rank 1 — IIT Jammu",
-  },
-  {
-    icon: Trophy,
-    tone: "text-gold",
-    label: "SIH 2025",
-    value: "National Winner",
-    sub: "Smart India Hackathon",
-  },
-  {
-    icon: Code2,
-    tone: "text-sage-green",
-    label: "DSA",
-    value: "500+ Problems",
-    sub: "400+ on LeetCode",
-  },
-  {
-    icon: MapPin,
-    tone: "text-terracotta",
-    label: "Based in",
-    value: "Jammu, India",
-    sub: "IIT Jammu Campus",
-  },
-];
-
-const tags = [
-  "C/C++",
-  "Python",
-  "JavaScript",
-  "Node.js",
-  "Express.js",
-  "PostgreSQL",
-  "MongoDB",
-  "Redis",
-  "Docker",
-  "AWS",
-  "PyTorch",
+const stats = [
+  { value: "9.13", label: "CGPA", c: "lime", r: -3 },
+  { value: "Rank 1", label: "Civil dept.", c: "teal", r: 2 },
+  { value: "500+", label: "DSA problems", c: "pink", r: -2 },
+  { value: "SIH '25", label: "national winner", c: "amber", r: 3 },
 ];
 
 export default function About() {
   return (
-    <section
-      id="about"
-      className="py-24 px-6 md:px-20 lg:px-32 max-w-7xl mx-auto"
-    >
-      <SectionHeading number="01" title="About Me" align="center" />
+    <section id="about" className="py-24 px-5 md:px-12 lg:px-24">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading number="01" title="the short version" note="hi, I'm Harsh ✌" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-14 items-start">
-        {/* Narrative */}
-        <motion.div
-          initial={{ opacity: 0, x: -32 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="space-y-5 text-muted-foreground text-base leading-relaxed"
-        >
-          <p className="text-foreground text-xl font-semibold">
-            I&apos;m Harsh — a Civil Engineering student at IIT Jammu who fell
-            hard for Computer Science.
-          </p>
-          <p>
-            My days are split between core engineering lectures and the LeetCode
-            grind at night. That contrast is something I genuinely enjoy — the
-            rigour of engineering thinking applied to software.
-          </p>
-          <p>
-            I picked up programming from scratch in my first year and
-            haven&apos;t stopped since. Right now I&apos;m a Software
-            Developer Intern at the{" "}
-            <span className="text-foreground font-medium">
-              Brahmaputra Board (Ministry of Jal Shakti)
-            </span>
-            , taking a government performance management system to production as
-            backend developer — the same project that won Smart India Hackathon 2025.
-          </p>
-          <p>
-            I care about systems that hold up under real users: clean
-            architecture, sane data models, and auth that doesn&apos;t leak.
-            Outside of work you&apos;ll usually find me listening to music,
-            travelling with friends, and hunting for great food.
-          </p>
+        <div className="grid lg:grid-cols-[1fr_320px] gap-14 items-start">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ type: "spring", stiffness: 200, damping: 24 }}
+            className="space-y-5 text-lg md:text-xl leading-relaxed text-paper/85"
+          >
+            <p>
+              I study <span className="hl">Civil Engineering</span> at IIT Jammu and spend
+              most of my free time writing code.
+            </p>
+            <p>
+              Started programming from zero in first year. Now I&apos;m a Software Developer
+              Intern at <span className="text-paper font-bold">Brahmaputra Board</span>{" "}
+              (Ministry of Jal Shakti), taking our{" "}
+              <span className="hl" style={{ "--hl": "var(--amber)" }}>SIH 2025</span>-winning
+              project to production.
+            </p>
+            <p>
+              I like clean data models, auth that actually holds, and backends that
+              don&apos;t fall over.
+            </p>
+            <p className="text-muted-foreground">
+              Off the keyboard: music, trips with friends, and hunting for good food.
+            </p>
 
-          <div className="pt-3 flex flex-wrap gap-2.5">
-            {tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 text-xs font-mono rounded-md border border-border bg-secondary/60 text-muted-foreground hover:border-primary/40 hover:text-primary transition-colors"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        </motion.div>
+            <div className="flex flex-wrap gap-4 pt-4">
+              {stats.map((s) => (
+                <motion.div
+                  key={s.label}
+                  whileHover={{ rotate: 0, scale: 1.06 }}
+                  className="brut px-4 py-3"
+                  style={{ "--shadow": `var(--${s.c})`, rotate: s.r }}
+                >
+                  <p className="font-display font-extrabold text-3xl" style={{ color: `var(--${s.c})` }}>
+                    {s.value}
+                  </p>
+                  <p className="font-mono text-[11px] uppercase text-muted-foreground">{s.label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
 
-        {/* Stat grid */}
-        <motion.div
-          initial={{ opacity: 0, x: 32 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="grid grid-cols-2 gap-4"
-        >
-          {highlights.map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.09, duration: 0.45 }}
-                whileHover={{ y: -5 }}
-                className="glass-panel rounded-xl p-5 group"
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <Icon
-                    className={`w-4 h-4 ${item.tone} group-hover:scale-110 transition-transform`}
-                  />
-                  <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.15em]">
-                    {item.label}
-                  </span>
-                </div>
-                <p className="text-foreground font-bold text-lg leading-tight">
-                  {item.value}
-                </p>
-                <p className="text-muted-foreground text-xs mt-1">{item.sub}</p>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+          {/* Polaroid */}
+          <motion.figure
+            initial={{ opacity: 0, rotate: 10, y: 40 }}
+            whileInView={{ opacity: 1, rotate: 4, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 140, damping: 16 }}
+            whileHover={{ rotate: 0, scale: 1.03 }}
+            className="relative mx-auto w-[260px] lg:w-full bg-paper p-3 pb-14 rounded-sm shadow-[8px_8px_0_var(--pink)]"
+          >
+            <span className="tape -top-3 left-1/2 -translate-x-1/2 -rotate-3" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/my_photo.jpeg"
+              alt="Harsh Agarwal holding the Smart India Hackathon 2025 winner certificate"
+              loading="lazy"
+              className="w-full aspect-square object-cover"
+            />
+            <figcaption className="absolute bottom-3 left-0 right-0 text-center font-hand text-2xl text-ink">
+              SIH 2025, we won!
+            </figcaption>
+          </motion.figure>
+        </div>
       </div>
     </section>
   );

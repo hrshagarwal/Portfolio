@@ -1,91 +1,88 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
 const bullets = [
-  "Taking our Smart India Hackathon 2025-winning prototype to production as backend developer of a performance management system for the Board's 195 employees; drafted the SRS with Ministry stakeholders.",
-  "Building REST APIs in Node.js and Express.js over PostgreSQL and MongoDB that ingest records from government platforms: eOffice (file movement), AEBAS (biometric attendance) and PFMS (finance).",
-  "Designed a KPI scoring engine with separate metrics for four officer tracks (Administrative, Technical, Field, Finance) that scores officers from these system records instead of manual annual appraisals.",
-  "Implementing single sign-on through e-Pramaan/eOffice OAuth, with JWT sessions and hierarchy-aware RBAC that scopes data access by an officer's position across 6+ role levels.",
+  "Taking our Smart India Hackathon 2025-winning prototype to production as backend developer, for the Board's 195 employees. Wrote the SRS with Ministry stakeholders.",
+  "REST APIs in Node.js + Express.js over PostgreSQL and MongoDB, pulling records from eOffice (file movement), AEBAS (biometric attendance) and PFMS (finance).",
+  "A KPI scoring engine with separate metrics for 4 officer tracks (Administrative, Technical, Field, Finance), replacing manual annual appraisals.",
+  "Single sign-on through e-Pramaan/eOffice OAuth, JWT sessions, and RBAC that scopes data by an officer's position across 6+ role levels.",
 ];
+
+const stack = ["Node.js", "Express.js", "PostgreSQL", "MongoDB", "OAuth 2.0", "JWT", "RBAC"];
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-6 md:px-20 lg:px-32">
-      <SectionHeading number="03" title="Experience" />
+    <section id="experience" className="py-24 px-5 md:px-12 lg:px-24">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading number="02" title="right now" note="← my day job" color="teal" rotate={3} />
 
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        className="glass-panel rounded-2xl overflow-hidden"
-      >
-        {/* Accent rail */}
-        <div className="h-1 w-full bg-gradient-to-r from-primary via-accent-indigo-light to-sage-green" />
-
-        <div className="p-7 md:p-9">
-          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 mb-6">
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-secondary/60 border border-border flex-shrink-0">
-                <Building2 className="w-6 h-6 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-foreground leading-snug">
-                  Software Developer Intern
-                </h3>
-                <p className="text-primary font-medium text-sm mt-1">
-                  Brahmaputra Board, Ministry of Jal Shakti (Govt. of India)
-                </p>
-                <p className="text-muted-foreground text-xs mt-1 font-mono">
-                  Backend Developer · Hybrid
-                </p>
-              </div>
+        <motion.article
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ type: "spring", stiffness: 180, damping: 22 }}
+          className="brut shadow-teal p-6 md:p-9"
+        >
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-7">
+            <div>
+              <h3 className="font-display font-extrabold text-3xl md:text-4xl text-paper">
+                Software Developer Intern
+              </h3>
+              <p className="font-mono text-teal mt-1">
+                Brahmaputra Board · Ministry of Jal Shakti (Govt. of India)
+              </p>
             </div>
-
-            <span className="font-mono text-xs text-muted-foreground bg-secondary px-3 py-1.5 rounded whitespace-nowrap self-start">
-              May 2026 — Present
-            </span>
+            <div className="flex flex-col items-end gap-2">
+              <span className="sticker" style={{ "--c": "var(--teal)", "--r": "2deg" }}>
+                May 2026 → now
+              </span>
+              <span className="font-mono text-xs text-muted-foreground">hybrid · backend</span>
+            </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-8 items-start">
-            <ul className="space-y-3.5 text-sm text-muted-foreground flex-1 leading-relaxed">
-              {bullets.map((bullet, i) => (
+          <div className="grid lg:grid-cols-[1fr_260px] gap-9 items-start">
+            <ul className="space-y-4">
+              {bullets.map((b, i) => (
                 <motion.li
                   key={i}
-                  initial={{ opacity: 0, x: -12 }}
+                  initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.1 + i * 0.08, duration: 0.4 }}
-                  className="flex items-start gap-3"
+                  transition={{ delay: 0.08 * i }}
+                  className="flex gap-3 text-paper/85 leading-relaxed"
                 >
-                  <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                  <span>{bullet}</span>
+                  <span className="font-mono text-teal shrink-0">0{i + 1}</span>
+                  <span>{b}</span>
                 </motion.li>
               ))}
             </ul>
 
-            {/* Certificate / trophy */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.94 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="lg:w-64 w-full flex-shrink-0 rounded-xl overflow-hidden border border-border shadow-lg group"
-            >
+            <figure className="relative bg-paper p-2.5 pb-10 rotate-2 hover:rotate-0 transition-transform shadow-[6px_6px_0_var(--amber)]">
+              <span className="tape -top-3 left-6 -rotate-6" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/images/certificate_trophy.jpg"
-                alt="Smart India Hackathon certificate and trophy"
+                alt="Smart India Hackathon 2025 certificate and trophy"
                 loading="lazy"
-                className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                className="w-full h-auto"
               />
-            </motion.div>
+              <figcaption className="absolute bottom-2 left-0 right-0 text-center font-hand text-xl text-ink">
+                SIH 2025 ✓
+              </figcaption>
+            </figure>
           </div>
-        </div>
-      </motion.div>
+
+          <div className="flex flex-wrap gap-2 mt-8">
+            {stack.map((s) => (
+              <span key={s} className="tag">
+                {s}
+              </span>
+            ))}
+          </div>
+        </motion.article>
+      </div>
     </section>
   );
 }

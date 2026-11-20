@@ -1,16 +1,40 @@
-import { IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Space_Grotesk,
+  Caveat,
+  Space_Mono,
+} from "next/font/google";
 import "./globals.css";
 
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-ibm-plex-sans",
+// Headings: chunky and a bit quirky
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  weight: ["500", "700", "800"],
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+// Body text
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+});
+
+// Handwritten notes (same feel as my doodle decks)
+const caveat = Caveat({
+  variable: "--font-hand",
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  display: "swap",
+});
+
+// Tags, terminal, code
+const spaceMono = Space_Mono({
+  variable: "--font-code",
+  subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -56,16 +80,16 @@ export const metadata = {
 };
 
 export const viewport = {
-  themeColor: "#F8F0E3",
+  themeColor: "#0D0D0F",
   width: "device-width",
   initialScale: 1,
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" style={{ colorScheme: "dark" }}>
       <body
-        className={`${ibmPlexSans.variable} ${jetbrainsMono.variable} antialiased bg-background text-foreground`}
+        className={`${bricolage.variable} ${spaceGrotesk.variable} ${caveat.variable} ${spaceMono.variable} antialiased bg-background text-foreground`}
       >
         {children}
       </body>

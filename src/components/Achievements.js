@@ -1,95 +1,73 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Trophy, Code2, Award, Medal } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
-const achievements = [
+const receipts = [
   {
-    icon: Trophy,
-    tone: "text-gold",
-    title: "Winner, Smart India Hackathon (SIH)",
-    detail: "National Level — Ministry of Jal Shakti problem statement",
+    big: "WINNER",
+    title: "Smart India Hackathon 2025",
+    detail: "National level · Ministry of Jal Shakti problem statement",
     year: "2025",
-    featured: true,
+    c: "amber",
   },
   {
-    icon: Code2,
-    tone: "text-sage-green",
-    title: "500+ DSA Problems Solved",
-    detail: "Across platforms, including 400+ on LeetCode",
+    big: "500+",
+    title: "DSA problems solved",
+    detail: "400+ of them on LeetCode",
     year: "2026",
+    c: "lime",
   },
   {
-    icon: Medal,
-    tone: "text-primary",
-    title: "Department Rank 1",
+    big: "#1",
+    title: "Department Rank",
     detail: "Civil Engineering, IIT Jammu",
-    year: "2024 – Present",
+    year: "2024 – now",
+    c: "teal",
   },
   {
-    icon: Award,
-    tone: "text-terracotta",
+    big: "×4",
     title: "Academic Excellence Award",
-    detail: "Outstanding academic performance — 4 consecutive semesters",
-    year: "2024 – Present",
+    detail: "4 semesters in a row",
+    year: "2024 – now",
+    c: "pink",
   },
 ];
 
 export default function Achievements() {
   return (
-    <section id="achievements" className="py-24 px-6 md:px-20 lg:px-32">
-      <SectionHeading number="06" title="Achievements" />
+    <section id="achievements" className="py-24 px-5 md:px-12 lg:px-24">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading number="05" title="the receipts" note="proof, not vibes" color="pink" rotate={-2} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {achievements.map((item, index) => {
-          const Icon = item.icon;
-          return (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+          {receipts.map((r, i) => (
             <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={r.title}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              whileHover={{ rotate: i % 2 ? 1.5 : -1.5 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: index * 0.08, duration: 0.45 }}
-              whileHover={{ y: -5 }}
-              className={`p-6 rounded-xl flex items-start gap-4 group ${
-                item.featured
-                  ? "gradient-border md:col-span-2 shadow-[0_8px_30px_-12px_hsla(38,72%,44%,0.4)]"
-                  : "glass-panel"
-              }`}
+              transition={{ type: "spring", stiffness: 240, damping: 18, delay: i * 0.06 }}
+              className={`brut p-6 md:p-7 flex items-center gap-6 ${i === 0 ? "sm:col-span-2 lg:col-span-3" : ""}`}
+              style={{ "--shadow": `var(--${r.c})` }}
             >
-              <div
-                className={`p-3 rounded-xl border border-border flex-shrink-0 ${
-                  item.featured ? "bg-gold/10" : "bg-secondary/60"
+              <p
+                className={`font-display font-extrabold leading-none shrink-0 ${
+                  i === 0 ? "text-6xl md:text-8xl" : "text-5xl md:text-6xl"
                 }`}
+                style={{ color: `var(--${r.c})` }}
               >
-                <Icon
-                  className={`${
-                    item.featured ? "w-7 h-7" : "w-5 h-5"
-                  } ${item.tone} group-hover:scale-110 transition-transform`}
-                />
-              </div>
-
-              <div className="flex-1 min-w-0">
-                <div className="flex items-start justify-between gap-3 flex-wrap">
-                  <h3
-                    className={`font-bold text-foreground leading-snug ${
-                      item.featured ? "text-xl" : "text-base"
-                    }`}
-                  >
-                    {item.title}
-                  </h3>
-                  <span className="font-mono text-[11px] text-muted-foreground bg-secondary px-2 py-0.5 rounded whitespace-nowrap">
-                    {item.year}
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
-                  {item.detail}
-                </p>
+                {r.big}
+              </p>
+              <div className="min-w-0">
+                <h3 className="font-display font-bold text-xl md:text-2xl text-paper">{r.title}</h3>
+                <p className="text-paper/70 text-sm mt-1">{r.detail}</p>
+                <p className="font-mono text-xs text-muted-foreground mt-2">{r.year}</p>
               </div>
             </motion.div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,161 +1,70 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Code2,
-  Server,
-  Database,
-  Layout,
-  Wrench,
-  BrainCircuit,
-} from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
-/**
- * Skill groups mirror the resume's "Technical Skills" section.
- * Icons are Lucide components (bundled locally) rather than CDN images,
- * so the grid never renders broken tiles when a CDN is slow or blocked.
- */
-const skillGroups = [
+// Mirrors the resume's Technical Skills section.
+const groups = [
+  { name: "languages", c: "lime", items: ["C++", "C", "Python", "JavaScript", "SQL"] },
   {
-    category: "Programming",
-    icon: Code2,
-    tone: "text-primary",
-    items: ["C++", "C", "Python", "JavaScript", "SQL"],
+    name: "backend",
+    c: "teal",
+    items: ["Node.js", "Express.js", "REST APIs", "JWT", "OAuth 2.0", "RBAC", "Socket.IO"],
+  },
+  { name: "databases", c: "pink", items: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "Mongoose"] },
+  {
+    name: "cloud & tools",
+    c: "amber",
+    items: ["AWS ECS Fargate", "ECR", "S3", "Docker", "Linux", "Git", "GitHub", "Postman"],
   },
   {
-    category: "Backend",
-    icon: Server,
-    tone: "text-sage-green",
-    items: [
-      "Node.js",
-      "Express.js",
-      "REST APIs",
-      "JWT",
-      "OAuth 2.0",
-      "RBAC",
-      "Socket.IO",
-    ],
+    name: "machine learning",
+    c: "violet",
+    items: ["PyTorch", "scikit-learn", "ONNX", "NumPy", "Pandas", "dlib", "Streamlit"],
   },
-  {
-    category: "Databases",
-    icon: Database,
-    tone: "text-terracotta",
-    items: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "Mongoose"],
-  },
-  {
-    category: "Frontend",
-    icon: Layout,
-    tone: "text-primary",
-    items: ["React.js", "HTML", "CSS", "Tailwind CSS", "Bootstrap", "EJS"],
-  },
-  {
-    category: "Machine Learning",
-    icon: BrainCircuit,
-    tone: "text-gold",
-    items: [
-      "PyTorch",
-      "scikit-learn",
-      "ONNX",
-      "NumPy",
-      "Pandas",
-      "dlib",
-      "Streamlit",
-    ],
-  },
-  {
-    category: "Cloud & Tools",
-    icon: Wrench,
-    tone: "text-sage-green",
-    items: [
-      "AWS (ECS Fargate, ECR, S3)",
-      "Docker",
-      "Linux",
-      "Git",
-      "GitHub",
-      "Postman",
-    ],
-  },
+  { name: "frontend", c: "blue", items: ["React.js", "HTML", "CSS", "Tailwind CSS", "Bootstrap", "EJS"] },
 ];
 
-const concepts = [
-  "MVC Architecture",
-  "Data Structures & Algorithms",
-  "System Design Basics",
-  "Graph Algorithms",
-  "Pub/Sub Messaging",
-  "Supervised Learning",
-  "Software Defined Networking",
-];
+// Small deterministic tilt per sticker so it looks hand-placed.
+const tilt = (i, j) => (((i * 7 + j * 13) % 9) - 4) * 0.8;
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 md:px-20 lg:px-32">
-      <SectionHeading
-        number="04"
-        title="Technical Arsenal"
-        subtitle="The tools I reach for when building backends, pipelines, and interfaces."
-      />
+    <section id="skills" className="py-24 px-5 md:px-12 lg:px-24">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading number="04" title="toolbox" note="stuff I actually use" color="amber" rotate={-4} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skillGroups.map((group, idx) => {
-          const Icon = group.icon;
-          return (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10">
+          {groups.map((g, i) => (
             <motion.div
-              key={group.category}
+              key={g.name}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: idx * 0.07, duration: 0.45 }}
-              whileHover={{ y: -5 }}
-              className="glass-panel p-6 rounded-xl group"
+              transition={{ type: "spring", stiffness: 220, damping: 22, delay: i * 0.05 }}
             >
-              <div className="flex items-center gap-2.5 mb-5 pb-3 border-b border-border">
-                <Icon
-                  className={`w-[18px] h-[18px] ${group.tone} group-hover:scale-110 transition-transform`}
-                />
-                <h3 className="font-mono text-base font-semibold text-foreground">
-                  {group.category}
-                </h3>
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {group.items.map((item) => (
+              <p className="font-hand text-3xl mb-3" style={{ color: `var(--${g.c})` }}>
+                {g.name}
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {g.items.map((item, j) => (
                   <span
                     key={item}
-                    className="px-2.5 py-1 text-xs font-mono rounded-md bg-secondary/70 text-muted-foreground border border-border hover:border-primary/40 hover:text-primary hover:bg-primary/5 transition-colors cursor-default"
+                    className="sticker"
+                    style={{ "--c": `var(--${g.c})`, "--r": `${tilt(i, j)}deg` }}
                   >
                     {item}
                   </span>
                 ))}
               </div>
             </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Core concepts */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mt-6 glass-panel p-6 rounded-xl"
-      >
-        <h3 className="font-mono text-base font-semibold text-sage-green mb-4">
-          Core Concepts
-        </h3>
-        <div className="flex flex-wrap gap-2.5">
-          {concepts.map((concept) => (
-            <span
-              key={concept}
-              className="px-3.5 py-1.5 bg-secondary/60 rounded-full text-sm text-foreground border border-border hover:border-sage-green/50 hover:text-sage-green transition-colors cursor-default"
-            >
-              {concept}
-            </span>
           ))}
         </div>
-      </motion.div>
+
+        <p className="font-mono text-sm text-muted-foreground mt-14">
+          also comfy with: DSA · MVC · graph algorithms · pub/sub · SDN basics
+        </p>
+      </div>
     </section>
   );
 }

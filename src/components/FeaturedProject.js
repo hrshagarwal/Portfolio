@@ -1,174 +1,116 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, FolderGit2, Play } from "lucide-react";
+import { ExternalLink, Github, Lock } from "lucide-react";
 import ThresholdDemo from "@/components/ThresholdDemo";
+import PodShipArch from "@/components/PodShipArch";
 
 const DEMOS = {
   threshold: ThresholdDemo,
+  podship: PodShipArch,
 };
 
-// Shows the YouTube thumbnail first and loads the player only on click,
-// so the page doesn't pull YouTube's scripts for every visitor.
-function YouTubeEmbed({ id, title }) {
-  const [playing, setPlaying] = useState(false);
-
-  if (playing) {
-    return (
-      <iframe
-        src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
-        title={`${title} demo video`}
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        className="absolute inset-0 w-full h-full"
-      />
-    );
-  }
-
-  return (
-    <button
-      type="button"
-      onClick={() => setPlaying(true)}
-      aria-label={`Play ${title} demo video`}
-      className="absolute inset-0 w-full h-full group/play cursor-pointer"
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
-        alt=""
-        loading="lazy"
-        className="w-full h-full object-cover transition-transform duration-700 group-hover/play:scale-[1.04]"
-      />
-      <span className="absolute inset-0 bg-black/25 group-hover/play:bg-black/15 transition-colors" />
-      <span className="absolute inset-0 flex items-center justify-center">
-        <span className="flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-primary-foreground font-medium shadow-xl shadow-black/30 group-hover/play:scale-105 transition-transform">
-          <Play className="w-5 h-5 fill-current" />
-          Watch demo
-        </span>
-      </span>
-    </button>
-  );
-}
-
+/**
+ * One big zine card per project: huge index number, coloured hard shadow,
+ * a live demo / media panel and short punchy bullets.
+ */
 export default function FeaturedProject({ project, index }) {
-  const isEven = index % 2 === 0;
+  const c = project.accent || "lime";
+  const flip = index % 2 === 1;
   const Demo = project.demo ? DEMOS[project.demo] : null;
-  const hasMedia = Boolean(
-    project.video || project.image || project.youtube || Demo
-  );
+  const hasMedia = Boolean(project.image || Demo);
+  const tilt = flip ? 0.6 : -0.6;
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 48 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="glass-panel rounded-2xl overflow-hidden group"
+      initial={{ opacity: 0, y: 60, rotate: 0 }}
+      whileInView={{ opacity: 1, y: 0, rotate: tilt }}
+      whileHover={{ rotate: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ type: "spring", stiffness: 150, damping: 20 }}
+      className="brut overflow-hidden"
+      style={{ "--shadow": `var(--${c})` }}
     >
-      <div
-        className={`grid grid-cols-1 ${
-          hasMedia ? "lg:grid-cols-2" : ""
-        } gap-0 items-stretch`}
-      >
-        {/* ── Media ──────────────────────────────────────── */}
+      <div className={`grid grid-cols-1 ${hasMedia ? "lg:grid-cols-2" : ""}`}>
         {hasMedia && (
           <div
+            className={`relative overflow-hidden border-b-2 lg:border-b-0 border-paper ${
+              flip ? "lg:order-2 lg:border-l-2" : "lg:border-r-2"
+            } ${Demo ? "bg-ink" : "min-h-[260px] lg:min-h-[380px]"}`}
             style={project.mediaBg ? { background: project.mediaBg } : undefined}
-            className={`relative bg-secondary/60 overflow-hidden ${
-              Demo ? "" : "min-h-[260px] lg:min-h-[380px]"
-            } ${isEven ? "" : "lg:order-2"}`}
           >
             {Demo ? (
-              <Demo />
-            ) : project.youtube ? (
-              <YouTubeEmbed id={project.youtube} title={project.title} />
-            ) : project.video ? (
-              <video
-                src={project.video}
-                controls
-                playsInline
-                preload="metadata"
-                className="w-full h-full object-cover"
-              >
-                Your browser does not support the video tag.
-              </video>
+              <Demo project={project} />
             ) : (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={project.image}
                 alt={project.imageAlt || project.title}
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-[1.03]"
+                className="absolute inset-0 w-full h-full object-contain"
               />
             )}
           </div>
         )}
 
-        {/* ── Content ────────────────────────────────────── */}
-        <div
-          className={`p-7 md:p-9 flex flex-col justify-center ${
-            !hasMedia ? "lg:px-12" : ""
-          } ${isEven ? "" : "lg:order-1"}`}
-        >
-          <div className="flex items-center gap-3 mb-3 flex-wrap">
-            <span className="font-mono text-xs uppercase tracking-[0.18em] text-primary">
-              Featured Project
+        <div className={`p-6 md:p-9 flex flex-col ${flip ? "lg:order-1" : ""}`}>
+          <div className="flex items-start justify-between gap-4">
+            <span
+              className="font-display font-extrabold text-7xl md:text-8xl leading-none text-outline"
+              style={{ WebkitTextStroke: `2px var(--${c})` }}
+            >
+              {String(index + 1).padStart(2, "0")}
             </span>
-            {project.year && (
-              <span className="font-mono text-xs text-muted-foreground">
-                {project.year}
-              </span>
-            )}
+            <div className="flex flex-col items-end gap-2 pt-2">
+              {project.status && (
+                <span className="sticker" style={{ "--c": `var(--${c})`, "--r": "3deg" }}>
+                  {project.status}
+                </span>
+              )}
+              <span className="font-mono text-xs text-muted-foreground">{project.year}</span>
+            </div>
           </div>
 
-          <h3 className="font-sans text-2xl md:text-3xl font-bold text-foreground mb-4 leading-tight">
-            {project.title}
+          <h3 className="font-display font-extrabold text-3xl md:text-4xl text-paper mt-4 leading-tight">
+            {project.name}
           </h3>
-
-          <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-5">
-            {project.description}
+          <p className="font-mono text-sm mt-1" style={{ color: `var(--${c})` }}>
+            {project.tagline}
           </p>
 
-          {/* Engineering highlights */}
+          <p className="text-paper/85 mt-4 leading-relaxed">{project.description}</p>
+
           {project.highlights?.length > 0 && (
-            <ul className="space-y-2 mb-5">
+            <ul className="mt-5 space-y-2.5">
               {project.highlights.map((point) => (
-                <li
-                  key={point}
-                  className="flex items-start gap-2.5 text-sm text-muted-foreground"
-                >
-                  <span className="mt-[7px] w-1.5 h-1.5 rounded-full bg-sage-green flex-shrink-0" />
+                <li key={point} className="flex gap-2.5 text-sm text-paper/80 leading-relaxed">
+                  <span style={{ color: `var(--${c})` }} className="shrink-0">
+                    ✦
+                  </span>
                   <span>{point}</span>
                 </li>
               ))}
             </ul>
           )}
 
-          {/* Tech stack */}
-          <ul className="flex flex-wrap gap-2 mb-6">
-            {project.techStack.map((tech) => (
-              <li
-                key={tech}
-                className="px-2.5 py-1 text-[11px] font-mono rounded-md bg-secondary/70 text-muted-foreground border border-border"
-              >
-                {tech}
-              </li>
+          <div className="flex flex-wrap gap-2 mt-6">
+            {project.techStack.map((t) => (
+              <span key={t} className="tag">
+                {t}
+              </span>
             ))}
-          </ul>
+          </div>
 
-          {/* Links + status */}
-          <div className="flex items-center gap-4 flex-wrap mt-auto">
+          <div className="flex flex-wrap items-center gap-3 mt-7 pt-2">
             {project.github && (
               <a
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${project.title} on GitHub`}
-                className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                aria-label={`${project.name} on GitHub`}
+                className="btn-brut bg-ink text-paper"
               >
-                <Github className="w-[18px] h-[18px]" />
-                Code
+                <Github className="w-4 h-4" /> code
               </a>
             )}
             {project.link && (
@@ -176,23 +118,16 @@ export default function FeaturedProject({ project, index }) {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${project.title} live demo`}
-                className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                aria-label={`${project.name} live demo`}
+                className="btn-brut text-ink"
+                style={{ background: `var(--${c})` }}
               >
-                <ExternalLink className="w-[18px] h-[18px]" />
-                Live
+                <ExternalLink className="w-4 h-4" /> live demo
               </a>
             )}
             {!project.github && !project.link && (
-              <span className="flex items-center gap-1.5 text-sm text-muted-foreground/70">
-                <FolderGit2 className="w-[18px] h-[18px]" />
-                Private repository
-              </span>
-            )}
-
-            {project.status && (
-              <span className="ml-auto inline-block px-3 py-1 text-[11px] font-medium rounded-full border border-primary/30 text-primary bg-primary/5">
-                {project.status}
+              <span className="flex items-center gap-2 font-mono text-sm text-muted-foreground">
+                <Lock className="w-4 h-4" /> private repo (government project)
               </span>
             )}
           </div>

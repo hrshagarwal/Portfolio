@@ -353,7 +353,7 @@ export default function ThresholdDemo() {
       <div
         id={`${sliderId}-verdict`}
         aria-live="polite"
-        className="rounded-lg border bg-cream/70 px-4 py-3"
+        className="rounded-lg border bg-black/30 px-4 py-3"
         style={{
           borderColor: `color-mix(in srgb, ${toneColor} 34%, transparent)`,
         }}

@@ -1,75 +1,58 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Users, Briefcase, Code } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
 const roles = [
   {
     title: "Portal Head",
-    org: "Training & Placement Cell (Career & Development Services), IIT Jammu",
-    period: "Apr 2026 – Present",
-    icon: Briefcase,
-    tone: "text-primary",
-    desc: "Leading development and maintenance of the placement portal serving the institute's student body.",
+    org: "Training & Placement Cell (CDS), IIT Jammu",
+    period: "Apr 2026 – now",
+    desc: "Building and looking after the placement portal for the T&P cell.",
+    c: "lime",
   },
   {
     title: "Sponsorship & Outreach Head",
     org: "Coding Club, IIT Jammu",
     period: "Jul 2025 – Jun 2026",
-    icon: Code,
-    tone: "text-sage-green",
-    desc: "Led sponsorship drives and outreach initiatives, building partnerships to fund club events and hackathons.",
+    desc: "Brought in sponsors and partners to fund club events and hackathons.",
+    c: "teal",
   },
   {
-    title: "Competitive Programming Mentor",
+    title: "CP Mentor",
     org: "Coding Club, IIT Jammu",
     period: "Jul 2025 – Jun 2026",
-    icon: Users,
-    tone: "text-terracotta",
-    desc: "Mentoring juniors in algorithms, data structures, and contest strategy through sessions and problem walkthroughs.",
+    desc: "Taught juniors DSA and contest strategy through sessions and problem walkthroughs.",
+    c: "pink",
   },
 ];
 
 export default function Responsibilities() {
   return (
-    <section id="responsibilities" className="py-24 px-6 md:px-20 lg:px-32">
-      <SectionHeading number="07" title="Positions of Responsibility" />
+    <section id="responsibilities" className="py-24 px-5 md:px-12 lg:px-24">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeading number="07" title="side quests" note="campus roles" color="teal" rotate={3} />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {roles.map((role, index) => {
-          const Icon = role.icon;
-          return (
+        <div className="grid md:grid-cols-3 gap-7">
+          {roles.map((r, i) => (
             <motion.div
-              key={role.title}
-              initial={{ opacity: 0, y: 24 }}
+              key={r.title}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
-              transition={{ delay: index * 0.09, duration: 0.45 }}
-              whileHover={{ y: -6 }}
-              className="glass-panel p-6 rounded-xl group flex flex-col"
+              transition={{ type: "spring", stiffness: 220, damping: 22, delay: i * 0.07 }}
+              className="brut brut-hover p-6"
+              style={{ "--shadow": `var(--${r.c})` }}
             >
-              <div className="mb-4 p-3 bg-secondary/60 rounded-xl w-fit border border-border group-hover:border-primary/30 transition-colors">
-                <Icon
-                  className={`w-5 h-5 ${role.tone} group-hover:scale-110 transition-transform`}
-                />
-              </div>
-
-              <h3 className="font-bold text-lg text-foreground mb-1.5 leading-snug">
-                {role.title}
-              </h3>
-              <p className="text-xs font-mono text-primary mb-2 leading-relaxed">
-                {role.org}
+              <span className="font-mono text-xs text-muted-foreground">{r.period}</span>
+              <h3 className="font-display font-extrabold text-2xl text-paper mt-2">{r.title}</h3>
+              <p className="font-mono text-sm mt-1" style={{ color: `var(--${r.c})` }}>
+                {r.org}
               </p>
-              <span className="text-[11px] font-mono text-muted-foreground bg-secondary px-2 py-0.5 rounded w-fit mb-3">
-                {role.period}
-              </span>
-              <p className="text-sm text-muted-foreground leading-relaxed mt-auto">
-                {role.desc}
-              </p>
+              <p className="text-paper/80 text-sm mt-4 leading-relaxed">{r.desc}</p>
             </motion.div>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </section>
   );
